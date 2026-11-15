@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Video Landing Page</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <div class="brand">VideoHub</div>
+        <nav>
+          <a href="/admin">Admin</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-inner">
+          <div>
+            <p class="eyebrow">Curated video library</p>
+            <h1>Watch your videos by unique share link.</h1>
+            <p class="lead">
+              Add a title and video URL, then publish it instantly using a short code like
+              <strong>/sample-slicedrv</strong>.
+            </p>
+            <div class="actions">
+              <a class="button primary" href="/admin">Manage videos</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="videos">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Latest videos</h2>
+          </div>
+          <div id="video-grid" class="video-grid"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

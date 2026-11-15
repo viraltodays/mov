@@ -1,0 +1,96 @@
+const videoGrid = document.getElementById('video-grid');
+const adminList = document.getElementById('admin-list');
+const form = document.getElementById('video-form');
+
+async function loadVideos() {
+  const response = await fetch('/api/videos');
+  return response.json();
+}
+
+function renderLandingVideos(videos) {
+  if (!videoGrid) return;
+
+  if (!videos.length) {
+    videoGrid.innerHTML = '<div class="video-card"><h3>No videos yet</h3><p class="video-code">Add your first video from the admin page.</p></div>';
+    return;
+  }
+
+  videoGrid.innerHTML = videos
+    .map(
+      (video) => `
+        <article class="video-card">
+          <a href="/${encodeURIComponent(video.code)}">
+            <div class="video-thumb">VIDEO</div>
+            <h3>${video.title}</h3>
+            <div class="video-code">/${video.code}</div>
+          </a>
+        </article>
+      `
+    )
+    .join('');
+}
+
+function renderAdminVideos(videos) {
+  if (!adminList) return;
+
+  if (!videos.length) {
+    adminList.innerHTML = '<div class="item"><div><strong>No videos yet</strong><small>Add a video code and title to get started.</small></div></div>';
+    return;
+  }
+
+  adminList.innerHTML = videos
+    .map(
+      (video) => `
+        <div class="item">
+          <div>
+            <strong>${video.title}</strong>
+            <small>/${video.code}</small>
+            <div><a href="/${video.code}" target="_blank" rel="noreferrer">Open page</a></div>
+          </div>
+          <button class="delete-btn" data-code="${video.code}">Delete</button>
+        </div>
+      `
+    )
+    .join('');
+
+  document.querySelectorAll('.delete-btn').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const code = button.dataset.code;
+      await fetch(`/api/videos/${encodeURIComponent(code)}`, { method: 'DELETE' });
+      const videos = await loadVideos();
+      renderAdminVideos(videos);
+      renderLandingVideos(videos);
+    });
+  });
+}
+
+if (form) {
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    const body = {
+      code: formData.get('code'),
+      title: formData.get('title'),
+      url: formData.get('url')
+    };
+
+    await fetch('/api/videos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+
+    form.reset();
+    const videos = await loadVideos();
+    renderAdminVideos(videos);
+    renderLandingVideos(videos);
+  });
+}
+
+(async () => {
+  const videos = await loadVideos();
+  renderLandingVideos(videos);
+  renderAdminVideos(videos);
+})();
+

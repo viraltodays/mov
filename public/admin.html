@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Video Admin</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="admin-body">
+    <div class="container admin-shell">
+      <aside class="admin-panel">
+        <div class="brand">VideoHub Admin</div>
+        <p>Add a new video and its short route.</p>
+        <form id="video-form">
+          <label>
+            Video code
+            <input type="text" name="code" placeholder="my-video" required />
+          </label>
+          <label>
+            Title
+            <input type="text" name="title" placeholder="My webinar" required />
+          </label>
+          <label>
+            Video URL
+            <input type="url" name="url" placeholder="https://cdn.slicedrv.com/...mp4" required />
+          </label>
+          <button type="submit" class="button primary">Save video</button>
+        </form>
+        <a class="button secondary" href="/">View landing page</a>
+      </aside>
+
+      <section class="admin-content">
+        <h1>Saved videos</h1>
+        <div id="admin-list" class="admin-list"></div>
+      </section>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
