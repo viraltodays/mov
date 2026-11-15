@@ -3,38 +3,37 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Video Admin</title>
+    <meta name="theme-color" content="#101114" />
+    <title>Admin — Mov</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
-  <body class="admin-body">
-    <div class="container admin-shell">
-      <aside class="admin-panel">
-        <div class="brand">VideoHub Admin</div>
-        <p>Add a new video and its short route.</p>
-        <form id="video-form">
-          <label>
-            Video code
-            <input type="text" name="code" placeholder="my-video" required />
-          </label>
-          <label>
-            Title
-            <input type="text" name="title" placeholder="My webinar" required />
-          </label>
-          <label>
-            Video URL
-            <input type="url" name="url" placeholder="https://cdn.slicedrv.com/...mp4" required />
-          </label>
-          <button type="submit" class="button primary">Save video</button>
+  <body>
+    <header class="topbar">
+      <a class="wordmark" href="/" aria-label="Mov home">mov<span>.</span></a>
+      <a class="admin-link" href="/">View site</a>
+    </header>
+    <main class="admin-layout">
+      <section class="admin-intro">
+        <p class="eyebrow">CONTROL PANEL</p>
+        <h1>Video library</h1>
+        <p class="muted">Add a title, share code, and video URL. Each saved item gets a link like <code>/?mov=your-code</code>.</p>
+        <form id="video-form" class="video-form">
+          <label for="code">Video code</label>
+          <input id="code" name="code" placeholder="TZXYAtgV1" required maxlength="80" />
+          <label for="title">Title</label>
+          <input id="title" name="title" placeholder="Video title" required maxlength="160" />
+          <label for="url">Video URL</label>
+          <input id="url" name="url" type="url" placeholder="https://cdn.slicedrv.com/video.mp4" required />
+          <p class="field-hint">HTTPS links from cdn2.videy.co and cdn.slicedrv.com are supported.</p>
+          <button class="button" type="submit">Save video <span aria-hidden="true">↗</span></button>
+          <p id="form-message" class="form-message" role="status"></p>
         </form>
-        <a class="button secondary" href="/">View landing page</a>
-      </aside>
-
-      <section class="admin-content">
-        <h1>Saved videos</h1>
-        <div id="admin-list" class="admin-list"></div>
       </section>
-    </div>
-
-    <script src="/app.js"></script>
+      <section class="library-section">
+        <div class="section-title"><div><p class="eyebrow">YOUR CONTENT</p><h2>Saved videos</h2></div><span id="video-count" class="count-badge">0</span></div>
+        <div id="admin-list" class="admin-list"><div class="empty-state">Loading your library…</div></div>
+      </section>
+    </main>
+    <script src="/app.js" defer></script>
   </body>
 </html>
