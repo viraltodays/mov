@@ -1,0 +1,12 @@
+name = "mov-video-site"
+main = "worker.js"
+compatibility_date = "2026-11-15"
+
+[[kv_namespaces]]
+binding = "VIDEOS"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = ["/api/*", "/admin", "/health", "/*"]

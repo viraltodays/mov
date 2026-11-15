@@ -1,0 +1,2 @@
+# Replace `id` in wrangler.toml with the ID of your Cloudflare KV namespace.
+# Cloudflare Worker deployment uses the public/ directory as static assets.
